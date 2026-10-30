@@ -1,0 +1,69 @@
+{
+  "name": "genpark-agentic-commerce-b2b-vmi-consignment-inventory-skill",
+  "version": "1.0.0",
+  "title": "B2B Vendor-Managed Inventory (VMI) & Consignment Ledger Skill",
+  "description": "Vendor Managed Inventory (VMI) consignment sell-through ledger matching, shrinkage loss allowance, and title transfer invoice trigger. Built for GenPark (https://www.genpark.ai).",
+  "homepage": "https://www.genpark.ai",
+  "linkedin": "https://www.linkedin.com/company/92955550",
+  "category": "agentic-commerce",
+  "topics": [
+    "vmi",
+    "consignment-inventory",
+    "b2b-supply-chain",
+    "title-transfer",
+    "agentic-commerce",
+    "model-context-protocol",
+    "genpark"
+  ],
+  "tools": [
+    {
+      "name": "reconcile_vmi_consignment_consumption",
+      "description": "Match buyer consumption telemetry against consignment stock on hand to trigger automated self-billing title transfer invoices.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "consignment_stock_on_hand": {
+            "type": "integer"
+          },
+          "consumed_units": {
+            "type": "integer"
+          },
+          "unit_contract_price_usd": {
+            "type": "number"
+          },
+          "allowed_shrinkage_pct": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "consignment_stock_on_hand",
+          "consumed_units",
+          "unit_contract_price_usd"
+        ]
+      }
+    },
+    {
+      "name": "compute_consignment_safety_replenishment_trigger",
+      "description": "Calculate automated replenishment purchase order quantity when consignment stock breaches min-max buffer.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "current_stock": {
+            "type": "integer"
+          },
+          "min_buffer": {
+            "type": "integer"
+          },
+          "max_capacity": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "current_stock",
+          "min_buffer",
+          "max_capacity"
+        ]
+      }
+    }
+  ]
+}
